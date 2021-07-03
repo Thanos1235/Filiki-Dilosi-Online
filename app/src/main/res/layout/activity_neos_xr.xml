@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".NeosXr">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Νέος Χρήστης!" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Παρακαλώ συμπληρώστε τα στοιχεία σας:" />
+
+        <TextView
+            android:id="@+id/idxrhsth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/epitheto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Επίθετο" />
+
+        <EditText
+            android:id="@+id/onoma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Όνομα" />
+
+        <EditText
+            android:id="@+id/adt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Αριθμός Δελτίου Ταυτότητας" />
+
+        <EditText
+            android:id="@+id/imerominiagenn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Ημερομηνία Γέννησης(ΗΗ-ΜΜ-ΧΧΧΧ)" />
+
+        <EditText
+            android:id="@+id/ardiplomatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Αριθμός Διπλώματος" />
+
+        <EditText
+            android:id="@+id/katigoriadipl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Κατηγορία Διπλώματος" />
+
+        <EditText
+            android:id="@+id/diarkeiadipl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Διάρκεια Έως" />
+
+        <EditText
+            android:id="@+id/tilefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Τηλέφωνο" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="E-mail" />
+
+        <EditText
+            android:id="@+id/dieuthinsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Διεύθυνση" />
+
+        <EditText
+            android:id="@+id/tk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Ταχυδρομικός Κώδικας" />
+
+        <EditText
+            android:id="@+id/xora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Χώρα" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Παρακαλώ συμπληρώστε τα στοιχεία του οχήματός σας:" />
+
+        <EditText
+            android:id="@+id/marka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Μάρκα" />
+
+        <EditText
+            android:id="@+id/montelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Μοντέλο" />
+
+        <EditText
+            android:id="@+id/tuposoximatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Τύπος Οχήματος" />
+
+        <EditText
+            android:id="@+id/arpinakidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Αριθμός Πινακίδας" />
+
+        <EditText
+            android:id="@+id/xoraautokinitou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Χώρα" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Παρακαλώ συμπληρώστε τα στοιχεία της ασφάλισης του οχήματός σας:" />
+
+        <EditText
+            android:id="@+id/onomaasflistikis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Όνομα Ασφαλιστικής Εταιρείας" />
+
+        <EditText
+            android:id="@+id/arsumvolaiou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Αριθμός Συμβολαίου" />
+
+        <EditText
+            android:id="@+id/arprasiniskartas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Αριθμός Πράσινης Κάρτας" />
+
+        <EditText
+            android:id="@+id/diarkeiaasfaleias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Διάρκεια" />
+
+        <EditText
+            android:id="@+id/praktoreio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Πρακτορείο" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Είναι Μεικτή Ασφάλεια;" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/kataxorisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ΚΑΤΑΧΩΡΗΣΗ" />
+
+    </LinearLayout>
+</ScrollView>
