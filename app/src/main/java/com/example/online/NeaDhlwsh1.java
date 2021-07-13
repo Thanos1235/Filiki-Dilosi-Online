@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class NeaDhlwsh1 extends AppCompatActivity {
+
+    private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +46,14 @@ public class NeaDhlwsh1 extends AppCompatActivity {
                 data1.put("Ημερομηνία",hmform);
                 data1.put("Ώρα", realtime);
 
+                mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων").push();
+                String key = mRef.getKey();
+                mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων/"+key);
+                mRef.setValue(data1);
+
                 Intent intent6 = new Intent(NeaDhlwsh1.this, NeaDhlwsh2.class);
                 intent6.putExtra("stoixeia", data1);
+                intent6.putExtra("key", key);
                 startActivity(intent6);
             }
         });

@@ -9,25 +9,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Παρακαλώ συμπληρώστε τις συνθήκες του ατυχήματος για τον οδηγό Β:"
+        android:text="Παρακαλώ συμπληρώστε τις συνθήκες του ατυχήματος ως οδηγός Β:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.094" />
-
-    <EditText
-        android:id="@+id/idb"
-        android:layout_width="267dp"
-        android:layout_height="61dp"
-        android:hint="ID οδηγού Β..."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
 
     <Spinner
         android:id="@+id/dropdownb"
@@ -37,7 +25,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403" />
+        app:layout_constraintVertical_bias="0.228" />
 
     <EditText
         android:id="@+id/parathrhseisb"
@@ -48,18 +36,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
-    
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="75dp"
-        android:text="ΠΑΡΑΚΑΛΩ ΕΝΕΡΓΟΠΟΙΗΣΤΕ ΤΗΝ ΤΟΠΟΘΕΣΙΑ ΣΑΣ ΠΡΙΝ ΠΑΤΗΣΕΤΕ ΤΟ ΠΑΡΑΚΑΤΩ ΚΟΥΜΠΙ ΚΑΙ ΣΥΝΕΧΙΣΕΤΕ"
+        app:layout_constraintVertical_bias="0.518" />
+
+    <EditText
+        android:id="@+id/idkey"
+        android:layout_width="233dp"
+        android:layout_height="68dp"
+        android:hint="ID της δήλωσης..."
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.801" />
 
     <Button
         android:id="@+id/submit3"
@@ -70,6 +58,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.932" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

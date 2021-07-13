@@ -81,12 +81,12 @@ public class StoixeiaXr extends AppCompatActivity {
         findViewById(R.id.neadhlwsh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent5 = new Intent();
+                Intent intent5 = new Intent();
                 intent5.setClassName("com.example.online", "com.example.online.NeaDhlwsh1");
-                startActivity(intent5);*/
-                String TOPIC = "/topics/" + "nB67cbx5LMMz5XgOKZV2qIRQVIu2";
-                String NOTIFICATION_TITLE = "hi";
-                String NOTIFICATION_MESSAGE = "plz work";
+                startActivity(intent5);
+                /*String TOPIC = "/topics/" + "nB67cbx5LMMz5XgOKZV2qIRQVIu2";
+                String NOTIFICATION_TITLE = "Φιλική Δήλωση Online";
+                String NOTIFICATION_MESSAGE = "Σας απεστάλη αίτημα νέας Φιλικής Δήλωσης. Αν είσαστε ο δεύτερος οδηγός του ατυχήματος, παρακαλώ πατήστε επάνω σε αυτή την ειδοποίηση, αλλιώς απλώς αγνοήστε την ειδοποίηση.";
 
                 JSONObject notif = new JSONObject();
                 JSONObject notifcationBody = new JSONObject();
@@ -99,7 +99,7 @@ public class StoixeiaXr extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e(TAG, "onCreate: " + e.getMessage() );
                 }
-                sendNotification(notif);
+                sendNotification(notif);*/
             }
         });
     }

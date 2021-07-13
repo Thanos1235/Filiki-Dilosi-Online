@@ -23,12 +23,10 @@ public class NeaDhlwsh3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nea_dhlwsh3);
 
-        final Intent intent7 = getIntent();
-
-        final EditText idb = findViewById(R.id.idb);
+        final Intent intent10 = getIntent();
 
         final Spinner dropdownb = findViewById(R.id.dropdownb);
-        String[] sun8hkesb = {"ΠΑΡΑΚΑΛΩ ΕΠΙΛΕΞΑΤΕ ΣΥΝΘΗΚΗ ΑΤΥΧΗΜΑΤΟΣ ΟΔΗΓΟΥ Α...", "Σταθμευμένο", "Σε στάση", "Εκκίνηση από στάση", "Άνοιγμα θύρας", "Προς στάθμευση",
+        String[] sun8hkesb = {"ΠΑΡΑΚΑΛΩ ΕΠΙΛΕΞΤΕ ΣΥΝΘΗΚΗ ΑΤΥΧΗΜΑΤΟΣ ΟΔΗΓΟΥ Β...", "Σταθμευμένο", "Σε στάση", "Εκκίνηση από στάση", "Άνοιγμα θύρας", "Προς στάθμευση",
                 "Εγκατέλειπε χώρο στάθμευσης, ιδιωτικό χώρο, χωματόδρομο", "Εισήρχετο σε χώρο στάθμευσης, ιδιωτικό χώρο, χωματόδρομο",
                 "Είσοδος σε πλατεία με κυκλική πορεία", "Κίνηση σε πλατεία με κυκλική πορεία", "Πρόσκρουση στο πίσω μέροσ άλλου οχήματος " +
                 "που προχωρούσε στην ίδια κατεύθυνση και στην ίδια λωρίδα", "Εκινείτο στην ίδια κατεύθυνση σε διαφορετική λωρίδα",
@@ -38,23 +36,23 @@ public class NeaDhlwsh3 extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sun8hkesb);
         dropdownb.setAdapter(adapter);
 
+        final EditText edtTxt = findViewById(R.id.idkey);
+
         findViewById(R.id.submit3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idodb = idb.getText().toString().trim();
                 EditText parathrhseisb = findViewById(R.id.parathrhseisb);
                 String observationsb = parathrhseisb.getText().toString();
                 String sun8b = String.valueOf(dropdownb.getSelectedItem());
-                HashMap<String, String> data1 = (HashMap<String, String>)intent7.getSerializableExtra("stoixeia");
+                HashMap<String, String> data1 = (HashMap<String, String>)intent10.getSerializableExtra("stoixeia");
                 data1.put("Συνθήκες οδηγού Β", sun8b);
-                data1.put("ID οδηγού Β", idodb);
                 data1.put("Παρατηρήσεις οδηγού Β", observationsb);
+                String key = edtTxt.getText().toString();
 
-                //mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων");
-                //mRef.push().setValue(data1);
+                mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων/"+key);
+                mRef.setValue(data1);
 
-                Intent intent8 = new Intent(NeaDhlwsh3.this, NeaDhlwshMaps.class);
-                intent8.putExtra("stoixeia", data1);
+                Intent intent8 = new Intent(NeaDhlwsh3.this, StoixeiaXr.class);
                 startActivity(intent8);
             }
         });

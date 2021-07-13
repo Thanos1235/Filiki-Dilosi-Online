@@ -14,6 +14,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.PermissionRequest;
 import android.widget.Toast;
@@ -21,8 +22,11 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -53,8 +57,9 @@ public class NeaDhlwshMaps extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nea_dhlwsh_maps);
 
-        final Intent intent8 = getIntent();
-        final HashMap<String, String> data1 = (HashMap<String, String>)intent8.getSerializableExtra("stoixeia");
+        final Intent intent7 = getIntent();
+        final HashMap<String, String> data1 = (HashMap<String, String>)intent7.getSerializableExtra("stoixeia");
+        final String key = intent7.getStringExtra("iddhlwshs");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -77,11 +82,14 @@ public class NeaDhlwshMaps extends FragmentActivity
                 Double lon = location.getLongitude();
                 data1.put("Longitude", lon.toString());
                 data1.put("Latitude", lat.toString());
-                mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων");
-                mRef.push().setValue(data1);
 
-                Toast.makeText(NeaDhlwshMaps.this, ""+lat, Toast.LENGTH_LONG);
+                mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων/"+key);
+                mRef.setValue(data1);
+                Toast.makeText(NeaDhlwshMaps.this, "Όλα έτοιμα! Έχει σταλεί ειδοποίηση στον Οδηγό Β. Ευχαριστούμε που χρησιμοποιήσατε την εφαρμογή Φιλική Δήλωση Online", Toast.LENGTH_LONG).show();
                 System.out.println(location.getLatitude());
+
+                Intent intent31 = new Intent(NeaDhlwshMaps.this, StoixeiaXr.class);
+                startActivity(intent31);
             }
         });
     }
@@ -98,14 +106,33 @@ public class NeaDhlwshMaps extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Τόπος Ατυχήματος").draggable(true));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng athome = new LatLng(37.9888946, 23.7600405);
+        Marker marker = mMap.addMarker(new MarkerOptions().position(athome).title("Τόπος Ατυχήματος").draggable(true));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(athome));
 
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
         //mMap.addMarker(new MarkerOptions().position(loc));
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+                Log.d("System out", "onMarkerDragStart..."+marker.getPosition().latitude+"..."+marker.getPosition().longitude);
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                Log.i("System out", "onMarkerDrag...");
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                Log.d("System out", "onMarkerDragEnd..."+marker.getPosition().latitude+"..."+marker.getPosition().longitude);
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+            }
+        });
     }
 
     private void enableMyLocation() {
