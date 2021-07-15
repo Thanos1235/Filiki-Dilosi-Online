@@ -19,7 +19,7 @@
         android:id="@+id/qwe"
         android:layout_width="168dp"
         android:layout_height="120dp"
-        android:text="asd"
+        android:text="ΚΑΤΑΧΩΡΗΣΗ"
         android:background="#359c5e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -64,6 +64,9 @@ public class NeaDhlwsh2 extends AppCompatActivity {
                 Intent intent7 = new Intent(NeaDhlwsh2.this, NeaDhlwshMaps.class);
                 intent7.putExtra("stoixeia", data1);
                 intent7.putExtra("iddhlwshs", key);
+                intent7.putExtra("idb", idb);
+
+
                 startActivity(intent7);
             }
         });

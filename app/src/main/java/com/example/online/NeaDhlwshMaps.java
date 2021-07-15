@@ -19,6 +19,10 @@ import android.view.View;
 import android.webkit.PermissionRequest;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,8 +36,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NeaDhlwshMaps extends FragmentActivity
         implements
@@ -52,14 +60,21 @@ public class NeaDhlwshMaps extends FragmentActivity
     LocationManager locationManager;
     private DatabaseReference mRef;
 
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAAJzVvQ-o:APA91bFapl0U-c0n4t3ILu3IfwMxH1gB9eShkubS-aZoemw5eZNXoc0N45cb-M2lpa9AFY4cmySv5gCavVpY9zleXYgqmMR0EdYDexlzGNsQ-wnOjigTYQcC6ogN4UmLufQXgrBJOuGc";
+    final private String contentType = "application/json";
+    final String TAG = "NOTIFICATION TAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nea_dhlwsh_maps);
 
+
         final Intent intent7 = getIntent();
         final HashMap<String, String> data1 = (HashMap<String, String>)intent7.getSerializableExtra("stoixeia");
-        final String key = intent7.getStringExtra("iddhlwshs");
+        final String key = intent7.getStringExtra("iddhlwshs").toString();
+        final String idb = intent7.getStringExtra("idb").toString();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -82,11 +97,28 @@ public class NeaDhlwshMaps extends FragmentActivity
                 Double lon = location.getLongitude();
                 data1.put("Longitude", lon.toString());
                 data1.put("Latitude", lat.toString());
+                data1.put("Επιβεβαιωμένη", "Όχι");
 
                 mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων/"+key);
                 mRef.setValue(data1);
                 Toast.makeText(NeaDhlwshMaps.this, "Όλα έτοιμα! Έχει σταλεί ειδοποίηση στον Οδηγό Β. Ευχαριστούμε που χρησιμοποιήσατε την εφαρμογή Φιλική Δήλωση Online", Toast.LENGTH_LONG).show();
-                System.out.println(location.getLatitude());
+
+                String TOPIC = "/topics/"+idb;
+                String NOTIFICATION_TITLE = "Φιλική Δήλωση Online";
+                String NOTIFICATION_MESSAGE = "Σας απεστάλη αίτημα νέας Φιλικής Δήλωσης. Αν είσαστε ο δεύτερος οδηγός του ατυχήματος, παρακαλώ πατήστε επάνω σε αυτή την ειδοποίηση, αλλιώς απλώς αγνοήστε την ειδοποίηση.";
+
+                JSONObject notif = new JSONObject();
+                JSONObject notifcationBody = new JSONObject();
+                try {
+                    notifcationBody.put("title", NOTIFICATION_TITLE);
+                    notifcationBody.put("message", NOTIFICATION_MESSAGE);
+
+                    notif.put("to", TOPIC);
+                    notif.put("data", notifcationBody);
+                } catch (JSONException e) {
+                    Log.e(TAG, "onCreate: " + e.getMessage() );
+                }
+                sendNotification(notif);
 
                 Intent intent31 = new Intent(NeaDhlwshMaps.this, StoixeiaXr.class);
                 startActivity(intent31);
@@ -94,6 +126,34 @@ public class NeaDhlwshMaps extends FragmentActivity
         });
     }
 
+
+    private void sendNotification(JSONObject notif) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notif,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
+                        //edtTitle.setText("");
+                        //edtMessage.setText("");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(NeaDhlwshMaps.this, "Request error", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

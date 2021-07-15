@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class NeaDhlwsh3 extends AppCompatActivity {
 
@@ -39,18 +43,21 @@ public class NeaDhlwsh3 extends AppCompatActivity {
         final EditText edtTxt = findViewById(R.id.idkey);
 
         findViewById(R.id.submit3).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 EditText parathrhseisb = findViewById(R.id.parathrhseisb);
                 String observationsb = parathrhseisb.getText().toString();
                 String sun8b = String.valueOf(dropdownb.getSelectedItem());
-                HashMap<String, String> data1 = (HashMap<String, String>)intent10.getSerializableExtra("stoixeia");
+                Map<String, Object> data1 = new HashMap<String, Object>();
                 data1.put("Συνθήκες οδηγού Β", sun8b);
                 data1.put("Παρατηρήσεις οδηγού Β", observationsb);
+                data1.put("Επιβεβαιωμένη", "ΝΑΙ");
                 String key = edtTxt.getText().toString();
+                Toast.makeText(NeaDhlwsh3.this, ""+key, Toast.LENGTH_LONG).show();
 
                 mRef = FirebaseDatabase.getInstance().getReference().child("Λίστα Δηλώσεων/"+key);
-                mRef.setValue(data1);
+                mRef.updateChildren(data1);
 
                 Intent intent8 = new Intent(NeaDhlwsh3.this, StoixeiaXr.class);
                 startActivity(intent8);
