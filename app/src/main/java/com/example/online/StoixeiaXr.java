@@ -84,51 +84,7 @@ public class StoixeiaXr extends AppCompatActivity {
                 Intent intent5 = new Intent();
                 intent5.setClassName("com.example.online", "com.example.online.NeaDhlwsh1");
                 startActivity(intent5);
-                /*String TOPIC = "/topics/" + "nB67cbx5LMMz5XgOKZV2qIRQVIu2";
-                String NOTIFICATION_TITLE = "Φιλική Δήλωση Online";
-                String NOTIFICATION_MESSAGE = "Σας απεστάλη αίτημα νέας Φιλικής Δήλωσης. Αν είσαστε ο δεύτερος οδηγός του ατυχήματος, παρακαλώ πατήστε επάνω σε αυτή την ειδοποίηση, αλλιώς απλώς αγνοήστε την ειδοποίηση.";
-
-                JSONObject notif = new JSONObject();
-                JSONObject notifcationBody = new JSONObject();
-                try {
-                    notifcationBody.put("title", NOTIFICATION_TITLE);
-                    notifcationBody.put("message", NOTIFICATION_MESSAGE);
-
-                    notif.put("to", TOPIC);
-                    notif.put("data", notifcationBody);
-                } catch (JSONException e) {
-                    Log.e(TAG, "onCreate: " + e.getMessage() );
-                }
-                sendNotification(notif);*/
             }
         });
-    }
-
-    private void sendNotification(JSONObject notif) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notif,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i(TAG, "onResponse: " + response.toString());
-                        //edtTitle.setText("");
-                        //edtMessage.setText("");
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(StoixeiaXr.this, "Request error", Toast.LENGTH_LONG).show();
-                        Log.i(TAG, "onErrorResponse: Didn't work");
-                    }
-                }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", serverKey);
-                params.put("Content-Type", contentType);
-                return params;
-            }
-        };
-        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 }

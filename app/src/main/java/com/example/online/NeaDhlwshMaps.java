@@ -87,8 +87,6 @@ public class NeaDhlwshMaps extends FragmentActivity
                 == PackageManager.PERMISSION_GRANTED) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        //System.out.println(location.getLatitude());
-        //System.out.println(location.getLongitude());
 
         findViewById(R.id.qwe).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,13 +165,12 @@ public class NeaDhlwshMaps extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng athome = new LatLng(37.9888946, 23.7600405);
-        Marker marker = mMap.addMarker(new MarkerOptions().position(athome).title("Τόπος Ατυχήματος").draggable(true));
+        Marker marker = mMap.addMarker(new MarkerOptions().position(athome).title("Τόπος ατυχήματος").draggable(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(athome));
 
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
-        //mMap.addMarker(new MarkerOptions().position(loc));
 
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
